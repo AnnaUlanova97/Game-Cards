@@ -51,7 +51,7 @@ function letTheGame() {
     totalCards = vertical * horizontal;
 
     document.getElementById("app").innerHTML = "";
-    document.getElementById("app").append(getGameCards(totalCards));
+    document.getElementById("app").append(getGameCards(vertical, horizontal));
 
     setTimeout(() => {
       document.getElementById("app").innerHTML = "";
@@ -79,17 +79,20 @@ function shuffle(arr) {
   return newArr;
 }
 
-function getGameCards(quantityCards) {
+function getGameCards(vertical, horizontal) {
   const CARDS = document.createElement("div");
   const NUMBERS = [];
 
   CARDS.classList.add("js-cards");
 
+  CARDS.style.gridTemplateColumns = `repeat(${horizontal}, 1fr)`;
+  CARDS.style.gridTemplateRows = `repeat(${vertical}, 1fr)`;
+
   (function generateNumbers(n) {
     for (let i = 1; i <= n; i++) {
       NUMBERS.push(i, i);
     }
-  })(quantityCards / 2);
+  })((vertical * horizontal) / 2);
 
   const SHUFFLED_NUMBERS = shuffle(NUMBERS);
 
@@ -140,7 +143,7 @@ function getGameCards(quantityCards) {
         }, 1000);
       }
 
-      if (cardsOpen.length === quantityCards) {
+      if (cardsOpen.length === vertical * horizontal) {
         setTimeout(() => {
           document.getElementById("app").append(CONTAINER);
         }, 1000);
