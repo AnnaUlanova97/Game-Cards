@@ -155,7 +155,7 @@ function getGameCards(vertical, horizontal) {
       cardsOpen.length = 0;
 
       setTimeout(() => {
-        app.append(letTheGame());
+        document.getElementById("app").append(letTheGame());
       }, 300);
     });
   });
