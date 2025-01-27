@@ -5,33 +5,33 @@ body {
   padding: 40px 200px;
 }
 
-.js-cards {
+.cards {
   width: fit-content;
   display: grid;
   gap: 15px;
   margin: 0 auto;
 }
 
-.js-card {
+.card {
   width: 150px;
   height: 140px;
   position: relative;
 }
 
-.js-card.active {
+.card.active {
   pointer-events: none;
 }
 
-.js-card.active .js-card__front {
+.card.active .card__front {
   transform: perspective(600px) rotateY(-180deg);
 }
 
-.js-card.active .js-card__back {
+.card.active .card__back {
   background-color: #ad909c;
   transform: perspective(600px) rotateY(0deg);
 }
 
-.js-cards__number {
+.cards__number {
   font-size: 24px;
 }
 
@@ -42,8 +42,8 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.js-card__front,
-.js-card__back {
+.card__front,
+.card__back {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,12 +63,12 @@ body {
   transition: transform 0.6s linear;
 }
 
-.js-card__front {
+.card__front {
   background-color: #c4b9b1;
   transform: perspective(600px) rotateY(0deg);
 }
 
-.js-card__back {
+.card__back {
   background-color: #ad909c;
   transform: perspective(600px) rotateY(180deg);
 }
@@ -79,7 +79,7 @@ body {
   padding: 30px 50px;
 }
 
-.js-card.open .js-card__back {
+.card.open .card__back {
   background-color: antiquewhite;
   font-style: italic;
 }
