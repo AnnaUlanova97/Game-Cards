@@ -48,10 +48,9 @@ function letTheGame() {
   FORM.addEventListener("submit", (event) => {
     const vertical = Number(INPUT_VERTICAL.value);
     const horizontal = Number(INPUT_HORIZONTAL.value);
-    totalCards = vertical * horizontal;
 
     document.getElementById("app").innerHTML = "";
-    document.getElementById("app").append(getGameCards(totalCards));
+    document.getElementById("app").append(getGameCards(vertical, horizontal));
 
     setTimeout(() => {
       document.getElementById("app").innerHTML = "";
@@ -79,17 +78,20 @@ function shuffle(arr) {
   return newArr;
 }
 
-function getGameCards(quantityCards) {
+function getGameCards(vertical, horizontal) {
   const CARDS = document.createElement("div");
   const NUMBERS = [];
 
-  CARDS.classList.add("js-cards");
+  CARDS.classList.add("cards");
+
+  CARDS.style.gridTemplateColumns = `repeat(${horizontal}, 1fr)`;
+  CARDS.style.gridTemplateRows = `repeat(${vertical}, 1fr)`;
 
   (function generateNumbers(n) {
     for (let i = 1; i <= n; i++) {
       NUMBERS.push(i, i);
     }
-  })(quantityCards / 2);
+  })((vertical * horizontal) / 2);
 
   const SHUFFLED_NUMBERS = shuffle(NUMBERS);
 
@@ -102,9 +104,9 @@ function getGameCards(quantityCards) {
 
     CONTAINER.classList.add("container");
     BUTTON.classList.add("btn");
-    CARD.classList.add("js-card");
-    CARDS_FRONT.classList.add("js-card__front");
-    CARDS_BACK.classList.add("js-card__back");
+    CARD.classList.add("card");
+    CARDS_FRONT.classList.add("card__front");
+    CARDS_BACK.classList.add("card__back");
 
     CARD.append(CARDS_FRONT);
     CARD.append(CARDS_BACK);
@@ -125,8 +127,8 @@ function getGameCards(quantityCards) {
 
       cardsArr.push(CARD);
       if (
-        cardsArr[0].querySelector(".js-card__back").textContent ===
-        cardsArr[1].querySelector(".js-card__back").textContent
+        cardsArr[0].querySelector(".card__back").textContent ===
+        cardsArr[1].querySelector(".card__back").textContent
       ) {
         cardsArr.forEach((card) => {
           card.classList.add("open");
@@ -140,7 +142,7 @@ function getGameCards(quantityCards) {
         }, 1000);
       }
 
-      if (cardsOpen.length === quantityCards) {
+      if (cardsOpen.length === vertical * horizontal) {
         setTimeout(() => {
           document.getElementById("app").append(CONTAINER);
         }, 1000);
@@ -152,7 +154,7 @@ function getGameCards(quantityCards) {
       cardsOpen.length = 0;
 
       setTimeout(() => {
-        app.append(letTheGame());
+        document.getElementById("app").append(letTheGame());
       }, 300);
     });
   });
