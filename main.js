@@ -48,7 +48,6 @@ function letTheGame() {
   FORM.addEventListener("submit", (event) => {
     const vertical = Number(INPUT_VERTICAL.value);
     const horizontal = Number(INPUT_HORIZONTAL.value);
-    totalCards = vertical * horizontal;
 
     document.getElementById("app").innerHTML = "";
     document.getElementById("app").append(getGameCards(vertical, horizontal));
